@@ -1,6 +1,10 @@
 USE books_review;
 
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS authors;
 DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE users (
  id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -11,7 +15,30 @@ CREATE TABLE users (
  created_at DATETIME
 );
 
+CREATE TABLE authors (
+ id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(60) NOT NULL,
+ created_at DATETIME
+ );
+ 
+CREATE TABLE books (
+ id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(60) NOT NULL,
+ author_id INTEGER NOT NULL,
+ created_at DATETIME,
+ FOREIGN KEY books(author_id) REFERENCES authors(id)
+);
 
+CREATE TABLE reviews (
+ id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ user_id INTEGER NOT NULL,
+ books_id INTEGER NOT NULL,
+ rating INTEGER NOT NULL,
+ description VARCHAR(200),
+ created_at DATETIME,
+ CONSTRAINT books_fk FOREIGN KEY reviews(user_id) REFERENCES users(id),
+ CONSTRAINT books_id FOREIGN KEY reviews(books_id) REFERENCES books(id)
+);
  
  
  

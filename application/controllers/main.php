@@ -15,6 +15,7 @@ class Main extends CI_Controller {
 
 		$view_data = array('errors' => $errors,
 							'success_message' => $success_message);
+		
 		$this->load->view("welcome.php", $view_data);
 	}
 
